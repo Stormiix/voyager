@@ -4,7 +4,7 @@ namespace TCG\Voyager\Widgets;
 
 use Arrilot\Widgets\AbstractWidget;
 use TCG\Voyager\Facades\Voyager;
-
+use App\Article;
 class PostDimmer extends AbstractWidget
 {
     /**
@@ -20,8 +20,8 @@ class PostDimmer extends AbstractWidget
      */
     public function run()
     {
-        $count = Voyager::model('Post')->count();
-        $string = $count == 1 ? 'post' : 'posts';
+        $count = Article::count();
+        $string = $count == 1 ? 'article' : 'articles';
 
         return view('voyager::dimmer', array_merge($this->config, [
             'icon'   => 'voyager-group',
@@ -29,7 +29,7 @@ class PostDimmer extends AbstractWidget
             'text'   => "You have {$count} {$string} in your database. Click on button below to view all posts.",
             'button' => [
                 'text' => 'View all posts',
-                'link' => route('voyager.posts.index'),
+                'link' => '/admin/articles',
             ],
             'image' => url(config('voyager.assets_path').'/images/widget-backgrounds/03.png'),
         ]));
